@@ -1,5 +1,7 @@
 package com.example.jsonserver.controller;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,8 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/user")
 public class UserController {
     @GetMapping
-    public String all(){
-        return "[\n" +
+    public ResponseEntity<String> all(){
+        String body = "[\n" +
                 "    {\n" +
                 "        \"userId\": 4,\n" +
                 "        \"adminId\": 7,\n" +
@@ -54,11 +56,12 @@ public class UserController {
                 "        \"activated\": true\n" +
                 "    }\n" +
                 "]";
+        return ResponseEntity.status(HttpStatus.OK).body(body);
     }
 
     @GetMapping("/{userId}")
-    public String one(@PathVariable("userId") Long id) {
-        return  "{\n" +
+    public ResponseEntity<String> one(@PathVariable("userId") Long id) {
+        String body =  "{\n" +
                 "    \"userId\": 4,\n" +
                 "    \"adminId\": 7,\n" +
                 "    \"name\": \"김뫄뫄\",\n" +
@@ -72,5 +75,6 @@ public class UserController {
                 "    \"updatedAt\": \"23. 8. 20. 오전 2:24\",\n" +
                 "    \"activated\": true\n" +
                 "}";
+        return ResponseEntity.status(HttpStatus.OK).body(body);
     }
 }
